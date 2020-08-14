@@ -27,7 +27,7 @@ public class getMenu extends HttpServlet {
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
 	 */
 	
-	
+	@SuppressWarnings("unchecked")
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArrayList<Menu> list = new ArrayList<>();
 		
@@ -37,15 +37,15 @@ public class getMenu extends HttpServlet {
 			list.add(new Menu("003", "Burger3", 10000, 10));
 			list.add(new Menu("004", "Burger4", 10000, 10));
 			list.add(new Menu("005", "Burger5", 10000, 10));
-		}
-		
-		for(Menu m:list) {
-			JSONObject obj = new JSONObject();
-			obj.put("id", m.getId());
-			obj.put("name", m.getName());
-			obj.put("price", m.getPrice());
-			obj.put("stock", m.getStock());
-			ja.add(obj);
+			
+			for(Menu m:list) {
+				JSONObject obj = new JSONObject();
+				obj.put("id", m.getId());
+				obj.put("name", m.getName());
+				obj.put("price", m.getPrice());
+				obj.put("stock", m.getStock());
+				ja.add(obj);
+			}
 		}
 		
 		String data = request.getParameter("order");

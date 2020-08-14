@@ -42,6 +42,7 @@ public class WeatherServelet2 extends HttpServlet {
 
 	public String getRequest(String url, String parameter) {
 		try {
+			@SuppressWarnings("unused")
 			String param = "{\"param\":\"" + parameter + "\"} ";
 			URL uri = new URL(url);
 			HttpURLConnection connection = (HttpURLConnection) uri.openConnection();

@@ -36,6 +36,9 @@
                 charge();
                 location.reload(true);
             })
+            $('#admin').click(function (){
+                location.href = 'admin.html';
+            })
         })
         function getData(){
             $.ajax({
@@ -236,7 +239,7 @@
     <h2>TOTAL:<span id="total"></span></h2>
     <div id="cart" style="width: 800px; height: 200px; border: 2px solid red; overflow: auto;"></div>
     <h2>CHARGE:<span id="status"></span></h2>
-    <div id="charge" style="width: fit-content; height: auto; border: 2px solid orange;"><button id="pay">PAY</button></div>
+    <div id="charge" style="width: fit-content; height: auto; border: 2px solid orange;"><button id="pay">PAY</button><button id="admin">ADMIN</button></div>
     <div id="map" style="width: 600px; height: 600px; border: 2px solid blue;"></div>
 </body>
 </html>

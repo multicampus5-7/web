@@ -1,47 +1,39 @@
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/series-label.js"></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
-
 <style>
 html, body {
 	margin: 0;
 	height: 100%;
 	overflow: hidden;
 }
-
 #left {
 	width: 49%;
 	height: 89%;
 	border: 2px solid green;
 	float: left;
 }
-
 #right {
 	width: 49%;
 	height: 89%;
 	border: 2px solid blue;
 	float: right;
 }
-
 #kakaoSearch {
 	overflow: scroll;
 	height: 45%;
 }
-
 img {
 	display: inline;
 	width: 30%;
 }
-
 p {
 	text-overflow: ellipsis;
 	overflow: hidden;
@@ -49,7 +41,6 @@ p {
 	white-space: nowrap;
 	text-overflow: ellipsis;
 }
-
 .highcharts-data-table table {
 	font-family: Verdana, sans-serif;
 	border-collapse: collapse;
@@ -59,37 +50,30 @@ p {
 	width: 100%;
 	max-width: 500px;
 }
-
 .highcharts-data-table caption {
 	padding: 1em 0;
 	font-size: 1.2em;
 	color: #555;
 }
-
 .highcharts-data-table th {
 	font-weight: 600;
 	padding: 0.5em;
 }
-
 .highcharts-data-table td, .highcharts-data-table th,
 	.highcharts-data-table caption {
 	padding: 0.5em;
 }
-
 .highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even)
 	{
 	background: #f8f8f8;
 }
-
 .highcharts-data-table tr:hover {
 	background: #f1f7ff;
 }
 </style>
-
 <script>
 	var taMax = [];
 	var taMin = [];
-
 	function getData() {
 		var urlstr = "https://dapi.kakao.com/v2/search/vclip";
 		var verb = $('input[name="verb"]').val();
@@ -125,7 +109,6 @@ p {
 			getData();
 		});
 	});
-
 	function getTemp() {
 		var urlstr = 'weather2';
 		$.ajax({
@@ -147,7 +130,6 @@ p {
 		});
 		getTemp();
 	});
-
 	function importDb(data) {
 		var items = $(data).find('item');
 		$(items).each(function(index, d) {
@@ -166,7 +148,6 @@ p {
 			taMin[5] = parseInt($(d).find('taMin8').text());
 		});
 	}
-
 	function getCharts() {
 		Highcharts.chart('container', {
 			chart : {
@@ -179,8 +160,7 @@ p {
 				text : 'Source: data.go.kr'
 			},
 			xAxis : {
-				categories : [ '3일 후', '4일 후', '5일 후', '6일 후', '7일 후', '8일 후',
-						'9일 후' ]
+				categories : [ '3일 후', '4일 후', '5일 후', '6일 후', '7일 후', '8일 후', '9일 후' ]
 			},
 			yAxis : {
 				title : {
@@ -226,18 +206,14 @@ p {
 			html += '</div>';
 			$('#manageMenu').append(html);
 		});
-		
 		var str='<br><br><br><br><button id="setMenu">confirm</button>';
 		$('#left').append(str);
 	}
 </script>
 </head>
-
 <body>
-	<h1>admin</h1>
-	<div id="left">
-		<div id="manageMenu"></div>
-	</div>
+	<h1>ADMIN</h1>
+	<div id="left"><div id="manageMenu"></div></div>
 	<div id="right">
 		<figure class="highcharts-figure">
 			<div id="container"></div>
@@ -246,6 +222,5 @@ p {
 		<button id="kakaoButton">search</button>
 		<div id="kakaoSearch"></div>
 	</div>
-
 </body>
 </html>
