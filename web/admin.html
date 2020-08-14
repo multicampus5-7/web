@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>ADMIN PAGE</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/series-label.js"></script>
@@ -74,6 +74,32 @@ p {
 <script>
 	var taMax = [];
 	var taMin = [];
+	let supply_data = "";
+	$(document).ready(function() {
+		$('#kakaoButton').click(function() {
+			getData();
+		});
+		$(document).on("click",'#setMenu',function (){
+			supply_data += '&';
+			supply_data += String(document.getElementById('manageMenu').childElementCount);
+			supply_data += '&';
+			supply_data += '%';
+			supply_data += String(document.getElementById('manageMenu').children[0].childElementCount);
+			supply_data += '%';
+			for (let i=0; i < document.getElementById('manageMenu').childElementCount; i++){
+				for (let j=0; j < document.getElementById('manageMenu').children[i].childElementCount; j++){
+					supply_data += '@';
+					supply_data += String($(document.getElementById('manageMenu').children[i].children[j]).val());
+					supply_data += '@';
+				}
+			}
+            sendMenuData(supply_data);
+            supply_data = ""
+        });
+		$(document).on("click",'#back_pos',function (){
+            location.href = 'Proj.html';
+        });
+	});
 	function getData() {
 		var urlstr = "https://dapi.kakao.com/v2/search/vclip";
 		var verb = $('input[name="verb"]').val();
@@ -104,11 +130,6 @@ p {
 			$('#kakaoSearch').append(temp);
 		});
 	};
-	$(document).ready(function() {
-		$('#kakaoButton').click(function() {
-			getData();
-		});
-	});
 	function getTemp() {
 		var urlstr = 'weather2';
 		$.ajax({
@@ -190,12 +211,22 @@ p {
 			async : false,
 			success : function(datas) {
 				displayMenu(datas);
+				products = datas;
 			},
 			error : function() {
 				alert('GET Error...');
 			}
 		});
 	}
+	function sendMenuData(datas){
+    	$.ajax({
+    		url:'getMenu',
+    		data:{"supply":datas},
+    		error:function(){
+    			alert('SEND Error...');
+    		}
+    	});
+    }
 	function displayMenu(datas) {
 		$(datas).each(function(index, data) {
 			var html = '';
@@ -206,7 +237,7 @@ p {
 			html += '</div>';
 			$('#manageMenu').append(html);
 		});
-		var str='<br><br><br><br><button id="setMenu">confirm</button>';
+		var str='<br><br><br><br><button id="back_pos">POS</button><button id="setMenu">confirm</button>';
 		$('#left').append(str);
 	}
 </script>
